@@ -7,7 +7,7 @@ mkdir -p ./dist/widgets
 widget_configs=$(find ./widgets -type f -name 'vite.config.ts')
 if [ -z "$widget_configs" ]; then
   echo "No widget-specific configs found. Using main config..."
-  vite build
+  npx vite build
 else
   echo "Building widgets with individual configs..."
   echo "Found widget configs:"
@@ -20,8 +20,8 @@ else
     widget_name=$(basename "$(dirname "$config")")
     printf "\n\n"
     echo "Building widget: $widget_name ..."
-    
+
     # Navigate to widget directory and build
-    (cd "$(dirname "$config")" && vite build --config "./vite.config.ts")
+    (cd "$(dirname "$config")" && npx vite build --config "./vite.config.ts")
   done
 fi

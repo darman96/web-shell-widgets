@@ -18,9 +18,10 @@ const LauncherContent: React.FC = () => {
   const { selectedMode } = useLauncher();
   const [test, setTest] = React.useState<string>("");
 
-  React.useEffect(() => {
-    setTest(window.hello());
-  }, [window.hello]);
+  const handleClick = async () => {
+    const resp = await window.webShell.invoke<string>("ping");
+    setTest(resp);
+  };
 
   return (
     <Flex w={"100%"} direction={"column"} gap={4}>
@@ -32,7 +33,7 @@ const LauncherContent: React.FC = () => {
       </Show>
       <Center>Test: {test}</Center>
       <Center>
-        <Button onClick={() => alert(window.hello())}>Click Me!</Button>
+        <Button onClick={handleClick}>Click Me!</Button>
       </Center>
     </Flex>
   );
@@ -41,7 +42,7 @@ const LauncherContent: React.FC = () => {
 const Launcher: React.FC<Props> = () => {
   return (
     <LauncherProvider initialMode={LauncherModeType.AppLauncher}>
-      <OverlayWindow {...windowProps}>
+      <OverlayWindow {...windowProps} height={300}>
         <LauncherContent />
       </OverlayWindow>
     </LauncherProvider>

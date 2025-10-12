@@ -1,14 +1,21 @@
 import React from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, FlexProps, Text, VStack } from "@chakra-ui/react";
 import OverlayWindow from "@/components/OverlayWindow";
+import Time from "./Time";
+import BarWindow, { Anchor } from "@/components/BarWindow";
+
+const containerProps: FlexProps = {
+  gap: 2,
+  padding: 2,
+};
 
 export const StatusBar: React.FC = () => {
   return (
-    <OverlayWindow p={0}>
-      <Flex height={"100%"} justify={"center"} align={"center"}>
-        <Text lineHeight={1}>22:34</Text>
+    <BarWindow anchor={Anchor.Right}>
+      <Flex {...containerProps}>
+        <Time />
       </Flex>
-    </OverlayWindow>
+    </BarWindow>
   );
 };
 

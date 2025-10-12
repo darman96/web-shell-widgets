@@ -8,7 +8,7 @@ const system = createSystem(defaultConfig, themeConfig);
 export const ThemeProvider: React.FC<ColorModeProviderProps> = (props) => {
   return (
     <ChakraProvider value={system}>
-      <ColorModeProvider {...props} />
+      <ColorModeProvider {...props} forcedTheme="dark" />
     </ChakraProvider>
   );
 };

@@ -8,13 +8,11 @@ const defaultProps: OverlayWindowProps = {
   borderColor: "border.panel",
   borderRadius: "md",
   borderWidth: "1px",
-  width: "100%",
-  height: "100%",
   padding: "4",
 };
 
 const OverlayWindow: React.FC<PropsWithChildren<OverlayWindowProps>> = (
-  props
+  props,
 ) => {
   const { children, ...styleProps } = props;
 
