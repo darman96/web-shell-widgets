@@ -1,11 +1,11 @@
 import { defineConfig } from "vite";
-import preact from "@preact/preset-vite";
+import react from "@vitejs/plugin-react";
 import { viteSingleFile } from "vite-plugin-singlefile";
 import path from "node:path";
 
 // Main project config
 export default defineConfig({
-  plugins: [preact(), viteSingleFile()],
+  plugins: [react(), viteSingleFile()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
@@ -21,7 +21,7 @@ export default defineConfig({
 // Export a helper function for widget configs to use
 export const createWidgetConfig = (widgetName, htmlPath) => {
   return defineConfig({
-    plugins: [preact(), viteSingleFile()],
+    plugins: [react(), viteSingleFile()],
     resolve: {
       alias: {
         "@": path.resolve(process.cwd(), "../../src"),

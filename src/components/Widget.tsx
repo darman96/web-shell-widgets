@@ -27,11 +27,12 @@ export const Widget: React.FC<PropsWithChildren<WidgetProps>> = (props) => {
   };
 
   useEffect(() => {
-    console.log("Test", containerRef.current);
-    if (!containerRef.current) {
-      // ref not yet initialized or screenInfo not loaded
+    if (!containerRef.current || !screenInfo) {
+      console.log("ref not yet initialized");
       return;
     }
+
+    console.log(screenInfo);
 
     const resizeObserver = new ResizeObserver(() => {
       const requestedWidth = Math.min(
@@ -62,11 +63,12 @@ export const Widget: React.FC<PropsWithChildren<WidgetProps>> = (props) => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [containerRef.current]);
+  }, [containerRef.current, screenInfo]);
 
   const mergedProps = {
     ...defaultProps,
     ...boxProps,
+    transition: `width 0.5s ease-in-out`,
   };
 
   return (

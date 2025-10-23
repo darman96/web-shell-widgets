@@ -1,10 +1,11 @@
 import Widget from "@/components/Widget";
 import Overlay from "@/widgets/Overlay";
-import { render } from "preact";
+import { createRoot } from "react-dom/client";
 
-render(
+const container = document.getElementById("app");
+const root = createRoot(container!);
+root.render(
   <Widget>
     <Overlay />
   </Widget>,
-  document.getElementById("app"),
 );

@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
 
 /**
  * A hook for handling async operations with loading, error, and value states
@@ -9,7 +9,7 @@ import {useCallback, useEffect, useState} from "react";
  */
 const useAsync = <T>(
   callback: () => Promise<T>,
-  dependencies: unknown[] = []
+  dependencies: unknown[] = [],
 ) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
@@ -19,7 +19,13 @@ const useAsync = <T>(
     setLoading(true);
     setError(null);
     setValue(null);
-    callback().then(setValue).catch(setError).finally(() => setLoading(false));
+    callback()
+      .then(setValue)
+      .catch((e) => {
+        setError(e);
+        setLoading(false);
+      })
+      .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
@@ -27,7 +33,7 @@ const useAsync = <T>(
     callbackMemoized();
   }, [callbackMemoized]);
 
-  return {loading, error, value};
-}
+  return { loading, error, value };
+};
 
 export default useAsync;

@@ -1,10 +1,11 @@
 import Widget from "@/components/Widget";
 import Launcher from "@/widgets/Launcher";
-import { render } from "preact";
+import { createRoot } from "react-dom/client";
 
-render(
+const container = document.getElementById("app");
+const root = createRoot(container!);
+root.render(
   <Widget>
     <Launcher />
   </Widget>,
-  document.getElementById("app")
 );

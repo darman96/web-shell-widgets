@@ -1,4 +1,4 @@
-import { render } from "preact";
+import { createRoot } from "react-dom/client";
 import ProviderStack from "./components/ProviderStack";
 import Desktop from "./Desktop";
 
@@ -10,4 +10,6 @@ const App: React.FC = () => {
   );
 };
 
-render(<App />, document.getElementById("app"));
+const container = document.getElementById("app");
+const root = createRoot(container!);
+root.render(<App />);

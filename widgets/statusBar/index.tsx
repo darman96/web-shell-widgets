@@ -1,4 +1,6 @@
 import StatusBar from "@/widgets/StatusBar";
-import { render } from "preact";
+import { createRoot } from "react-dom/client";
 
-render(<StatusBar />, document.getElementById("app"));
+const container = document.getElementById("app");
+const root = createRoot(container!);
+root.render(<StatusBar />);

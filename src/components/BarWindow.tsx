@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, useEffect } from "preact/compat";
-import { Box, Float, SystemStyleObject } from "@chakra-ui/react";
+import React, { PropsWithChildren, useState } from "react";
+import { SystemStyleObject } from "@chakra-ui/react";
 import Widget, { WidgetProps } from "./Widget";
 
 export enum Anchor {
@@ -58,13 +58,27 @@ export interface BarWindowProps extends SystemStyleObject {
 const BarWindow: React.FC<PropsWithChildren<BarWindowProps>> = (props) => {
   const { anchor, children, ...boxProps } = props;
 
+  const [size, setSize] = useState(64);
+
+  const handleClick = () => {
+    if (size === 64) {
+      setSize(128);
+    } else if (size === 128) {
+      setSize(64);
+    }
+  };
+
   const mergedProps = {
     ...defaultProps,
     ...boxProps,
     ...calculateProps(anchor),
   };
 
-  return <Widget {...mergedProps}>{children}</Widget>;
+  return (
+    <Widget {...mergedProps} width={size} onClick={handleClick}>
+      {children}
+    </Widget>
+  );
 };
 
 export default BarWindow;
